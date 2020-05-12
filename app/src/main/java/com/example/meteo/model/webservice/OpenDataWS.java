@@ -1,8 +1,6 @@
 package com.example.meteo.model.webservice;
 
 import android.os.Build;
-import android.util.Log;
-import android.widget.EditText;
 
 import androidx.annotation.RequiresApi;
 

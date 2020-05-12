@@ -4,6 +4,7 @@ package com.example.meteo.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +27,7 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoAdapter.ViewHolder>{
 
 
 
-        public MeteoAdapter(ArrayList<City_info> city_infos,ArrayList<Current_condition> current_conditions) {
+        public MeteoAdapter(ArrayList<City_info> city_infos, ArrayList<Current_condition> current_conditions) {
             this.city_infos = city_infos;
             this.current_conditions = current_conditions;
 //            this.onMeteoListener = onMeteoListener;
@@ -56,8 +57,10 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoAdapter.ViewHolder>{
 
             holder.txCityName.setText(city_info.getName());
             holder.tvCityDate.setText(current_condition.getDate().toString());
+            holder.tvHour.setText(current_condition.getHour().toString());
             holder.tvCityTemp.setText(current_condition.getTmp().toString());
             holder.tvCityCondition.setText(current_condition.getCondition());
+            holder.wbIcon.loadUrl(current_condition.getIcon());
 
 
 //            holder.root.setOnClickListener(new View.OnClickListener() {
@@ -90,10 +93,13 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoAdapter.ViewHolder>{
             public TextView txCityName;
             public TextView tvCityDateTitle;
             public TextView tvCityDate;
+            public TextView tvHourTitle;
+            public TextView tvHour;
             public TextView tvCityTempTitle;
             public TextView tvCityTemp;
             public TextView tvCityConditionTitle;
             public TextView tvCityCondition;
+            public WebView wbIcon;
             public GoogleMap map;
 
 
@@ -105,10 +111,13 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoAdapter.ViewHolder>{
                 txCityName = (TextView) itemView.findViewById(R.id.tx_cityName);
                 tvCityDateTitle = (TextView) itemView.findViewById( R.id.tv_cityDateTitle );
                 tvCityDate = (TextView)itemView.findViewById( R.id.tv_cityDate );
+                tvHourTitle = (TextView)itemView.findViewById(R.id.tv_HourTitle);
+                tvHour = (TextView)itemView.findViewById(R.id.tv_hour);
                 tvCityTempTitle = (TextView)itemView.findViewById( R.id.tv_cityTempTitle );
                 tvCityTemp = (TextView)itemView.findViewById( R.id.tv_cityTemp );
                 tvCityConditionTitle = (TextView)itemView.findViewById( R.id.tv_cityConditionTitle );
                 tvCityCondition = (TextView)itemView.findViewById( R.id.tv_cityCondition );
+                wbIcon = (WebView)itemView.findViewById(R.id.icon);
 
 
             }

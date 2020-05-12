@@ -1,7 +1,7 @@
 package com.example.meteo.model;
 
 
-public class City_info   {
+public class City_info {
 
     private String name;
     private String country;

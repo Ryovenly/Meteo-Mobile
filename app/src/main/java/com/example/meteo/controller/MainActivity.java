@@ -20,7 +20,6 @@ import com.example.meteo.model.Current_condition;
 import com.example.meteo.model.webservice.OpenDataWS;
 import com.example.meteo.view.MeteoAdapter;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
