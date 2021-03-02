@@ -19,6 +19,8 @@ import com.example.meteo.model.City_info;
 import com.example.meteo.model.Current_condition;
 import com.example.meteo.model.webservice.OpenDataWS;
 import com.example.meteo.view.MeteoAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editText;
     private Button btCity;
     private RecyclerView rv;
+
+    private AdView mAdView;
+    private AdView mAdView2;
 
     // Données
     private ArrayList<City_info> city_infos;
@@ -47,12 +52,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvIndication = (TextView)findViewById( R.id.tv_indication );
         editText = (EditText)findViewById( R.id.editText );
         btCity = (Button)findViewById( R.id.bt_city );
-        rv = (RecyclerView) findViewById(R.id.rv);
+        rv = findViewById(R.id.rv);
 
         btCity.setOnClickListener(this);
 
         city_infos = new ArrayList<>();
         current_conditions = new ArrayList<>();
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mAdView2 = findViewById(R.id.adView2);
+        AdRequest adRequest2 = new AdRequest.Builder().build();
+        mAdView2.loadAd(adRequest2);
+
 
         meteoAdapter = new MeteoAdapter(city_infos,current_conditions);
         rv.setLayoutManager(new LinearLayoutManager(this));
