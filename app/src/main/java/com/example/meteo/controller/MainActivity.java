@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "meteo").build();
 
+
         try {
 
             MyAT2 myAT2 = new MyAT2();
@@ -109,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-
         Observable.fromCallable(()->{
           meteoEntities = (ArrayList<MeteoEntity>) db.meteoDao().getLast3();
             cityAdapter = new CityAdapter((meteoEntities));
@@ -118,10 +119,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
+
             return "done";
         }  ).subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(System.out::println, Throwable::printStackTrace);
+
+
 
 
     }
@@ -223,27 +228,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
-                // On récupère la dernière valeur de la ville enregistre via une bdd
+
 
                 Observable.fromCallable(()->{
-                  //  Thread.sleep(2000);
+
                   ville = db.meteoDao().getLast().get(0).city_name;
                     Log.e("test","c'est ma"+ville);
+
+              //      ville = "Lyon";
+                    resultat = OpenDataWS.getCityInfoDuServeur(ville);
+                    resultat1 = OpenDataWS.getCurrentConditionDuServeur(ville);
+
+
+                    String cityName=resultat.get(0).getName();
 
                     return "done";
                 }  ).subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(System.out::println, Throwable::printStackTrace);
 
-                Log.e("test",ville);
-               // ville = "Lyon";
-                resultat = OpenDataWS.getCityInfoDuServeur(ville);
-                resultat1 = OpenDataWS.getCurrentConditionDuServeur(ville);
-
-
-                String cityName=resultat.get(0).getName();
-
-                Log.e("test",cityName);
 
             } catch (Exception e) {
                 exception = e;
@@ -260,11 +263,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(),"Erreur",Toast.LENGTH_SHORT).show();
             }
             else{
-                city_infos.clear();
-                city_infos.addAll(resultat);
-                current_conditions.clear();
-                current_conditions.addAll(resultat1);
-                meteoAdapter.notifyDataSetChanged();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        city_infos.clear();
+                        city_infos.addAll(resultat);
+                        current_conditions.clear();
+                        current_conditions.addAll(resultat1);
+                        meteoAdapter.notifyDataSetChanged();
+
+                    }
+                }, 5000);
+
 
                 Toast.makeText(getApplicationContext(),"Chargement réussi",Toast.LENGTH_SHORT).show();
 
