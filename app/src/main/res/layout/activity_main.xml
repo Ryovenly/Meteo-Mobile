@@ -44,6 +44,18 @@
             android:textColor="#38C9DC" />
 
         <TextView
+            android:id="@+id/tv_lastcityDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vos anciennes villes :" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_meteo" />
+
+        <TextView
             android:id="@+id/tv_indication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -87,7 +87,7 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoAdapter.ViewHolder>{
          * Classe interne représentant les pointeurs vers les composants graphiques d'une ligne de la liste
          * Il y aura une instance de cette classe par ligne
          */
-        protected class ViewHolder extends RecyclerView.ViewHolder {
+        protected static class ViewHolder extends RecyclerView.ViewHolder {
 
             public TextView tvCityNameTitle;
             public TextView txCityName;
