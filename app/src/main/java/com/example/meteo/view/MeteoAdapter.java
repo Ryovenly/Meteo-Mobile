@@ -39,7 +39,7 @@ public class MeteoAdapter extends RecyclerView.Adapter<MeteoAdapter.ViewHolder>{
          */
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meteo, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meteo2, parent, false);
 
             return new MeteoAdapter.ViewHolder(view);
         }

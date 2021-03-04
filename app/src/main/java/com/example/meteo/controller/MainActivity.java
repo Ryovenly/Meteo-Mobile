@@ -230,7 +230,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try {
 
 
-                Observable.fromCallable(()->{
 
                   ville = db.meteoDao().getLast().get(0).city_name;
                     Log.e("test","c'est ma"+ville);
@@ -242,10 +241,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     String cityName=resultat.get(0).getName();
 
-                    return "done";
-                }  ).subscribeOn(Schedulers.computation())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(System.out::println, Throwable::printStackTrace);
 
 
             } catch (Exception e) {
@@ -264,17 +259,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else{
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+
                         city_infos.clear();
                         city_infos.addAll(resultat);
                         current_conditions.clear();
                         current_conditions.addAll(resultat1);
                         meteoAdapter.notifyDataSetChanged();
 
-                    }
-                }, 5000);
 
 
                 Toast.makeText(getApplicationContext(),"Chargement réussi",Toast.LENGTH_SHORT).show();
