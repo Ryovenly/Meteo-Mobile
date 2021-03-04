@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         meteoAdapter.notifyDataSetChanged();
 
                     }
-                }, 5000);
+                }, 15000);
 
 
                 Toast.makeText(getApplicationContext(),"Chargement réussi",Toast.LENGTH_SHORT).show();
